@@ -1,0 +1,51 @@
+{
+  "name": "Zolvo: WhatsApp Inbound Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-inbound",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook WhatsApp",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            { "value1": "={{ $json.event }}", "operation": "equal", "value2": "message" }
+          ]
+        }
+      },
+      "id": "isMessage",
+      "name": "¿Es mensaje entrante?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.ZOLVO_APP_URL }}/api/webhooks/whatsapp",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "forward",
+      "name": "Forward al backend",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, 200]
+    }
+  ],
+  "connections": {
+    "Webhook WhatsApp": { "main": [[{ "node": "¿Es mensaje entrante?", "type": "main", "index": 0 }]] },
+    "¿Es mensaje entrante?": { "main": [[{ "node": "Forward al backend", "type": "main", "index": 0 }], []] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "active": false
+}

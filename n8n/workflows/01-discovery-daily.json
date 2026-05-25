@@ -1,0 +1,92 @@
+{
+  "name": "Zolvo: Discovery Daily",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "hours", "hoursInterval": 24 }] }
+      },
+      "id": "trigger",
+      "name": "Cron: Cada día 6am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.ZOLVO_APP_URL }}/api/leads/discover",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"founder OR ceo OR CFO LATAM colombia mexico startup\",\n  \"maxResults\": 12,\n  \"useDemoData\": false\n}",
+        "options": { "timeout": 60000 }
+      },
+      "id": "discover",
+      "name": "POST /api/leads/discover",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "results",
+        "options": {}
+      },
+      "id": "split",
+      "name": "Split each lead",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.ZOLVO_APP_URL }}/api/leads/{{ $json.lead.id }}/classify",
+        "options": { "timeout": 30000 }
+      },
+      "id": "classify",
+      "name": "Classify lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [960, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.classification.intent_score }}",
+              "operation": "largerEqual",
+              "value2": 65
+            }
+          ]
+        }
+      },
+      "id": "filter",
+      "name": "Filter intent >= 65",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1200, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.ZOLVO_APP_URL }}/api/leads/{{ $('Classify lead').item.json.lead_id }}/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"{{ $('Classify lead').item.json.classification.preferred_channels[0] }}\",\n  \"sequence_step\": 1\n}",
+        "options": { "timeout": 60000 }
+      },
+      "id": "generate",
+      "name": "Generate first-touch",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1440, 200]
+    }
+  ],
+  "connections": {
+    "Cron: Cada día 6am": { "main": [[{ "node": "POST /api/leads/discover", "type": "main", "index": 0 }]] },
+    "POST /api/leads/discover": { "main": [[{ "node": "Split each lead", "type": "main", "index": 0 }]] },
+    "Split each lead": { "main": [[{ "node": "Classify lead", "type": "main", "index": 0 }]] },
+    "Classify lead": { "main": [[{ "node": "Filter intent >= 65", "type": "main", "index": 0 }]] },
+    "Filter intent >= 65": { "main": [[{ "node": "Generate first-touch", "type": "main", "index": 0 }], []] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "active": false
+}

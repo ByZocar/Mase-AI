@@ -1,0 +1,34 @@
+{
+  "name": "Zolvo: Content Weekly",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "weeks", "weeksInterval": 1 }] }
+      },
+      "id": "weekly",
+      "name": "Cron: Cada lunes 8am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.ZOLVO_APP_URL }}/api/content/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"windowDays\": 7,\n  \"maxPosts\": 3\n}",
+        "options": { "timeout": 90000 }
+      },
+      "id": "generate",
+      "name": "Generar 3 piezas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300]
+    }
+  ],
+  "connections": {
+    "Cron: Cada lunes 8am": { "main": [[{ "node": "Generar 3 piezas", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "active": false
+}

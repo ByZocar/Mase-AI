@@ -1,0 +1,71 @@
+version: "3.9"
+
+# =============================================================================
+# Zolvo Engine - Local orchestration stack
+#  - n8n: workflow orchestrator (port 5678)
+#  - WAHA: WhatsApp HTTP API (port 3030)
+#  - postgres: persistence for n8n
+#
+# Usage:
+#   docker compose up -d
+#   Open n8n at http://localhost:5678
+#   Connect WhatsApp QR at http://localhost:3030
+# =============================================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: n8n_password
+      POSTGRES_DB: n8n
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: n8n
+      DB_POSTGRESDB_PASSWORD: n8n_password
+      N8N_BASIC_AUTH_ACTIVE: "true"
+      N8N_BASIC_AUTH_USER: zolvo
+      N8N_BASIC_AUTH_PASSWORD: zolvo_n8n_2026
+      N8N_HOST: localhost
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      N8N_ENCRYPTION_KEY: zolvo_encryption_key_2026
+      GENERIC_TIMEZONE: America/Bogota
+      ZOLVO_APP_URL: http://host.docker.internal:3001
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/home/node/.n8n/workflows
+    depends_on:
+      - postgres
+
+  waha:
+    image: devlikeapro/waha:latest
+    restart: unless-stopped
+    ports:
+      - "3030:3000"
+    environment:
+      WHATSAPP_HOOK_URL: "http://host.docker.internal:3001/api/webhooks/whatsapp"
+      WHATSAPP_HOOK_EVENTS: "message,message.any"
+      WHATSAPP_API_KEY: "zolvo-local-secret"
+      WHATSAPP_DEFAULT_ENGINE: "WEBJS"
+    volumes:
+      - waha_data:/app/.sessions
+
+volumes:
+  postgres_data:
+  n8n_data:
+  waha_data:
