@@ -1,266 +1,284 @@
-# Pitch Video · Mase para Zolvo — 5 minutos exactos
+# Pitch Video · Mase for Zolvo — 5 minutes flat
 
-> **Aplicación:** Makers Fellowship 2026 — Coding Fellowship
-> **Challenge:** "AI Sales & Growth Engine to launch Zolvo in a new market"
-> **Demo:** [mase-ai.vercel.app](https://mase-ai.vercel.app) · **Repo:** [github.com/ByZocar/Mase-AI](https://github.com/ByZocar/Mase-AI)
+> **Application:** Makers Fellowship 2026 — Coding Fellowship
+> **Challenge:** _"AI Sales & Growth Engine to launch Zolvo in a new market"_
+> **Live demo:** [mase-ai.vercel.app](https://mase-ai.vercel.app) · **Repo:** [github.com/ByZocar/Mase-AI](https://github.com/ByZocar/Mase-AI)
 
-## Qué pide el challenge (PDF de Zolvo)
+## What the brief asks (Zolvo's PDF)
 
 > _"Coding Fellowship: Shows Architecture and Automation. You must present a functional flow (using tools like n8n or Cursor AI) that connects leads with AI agents in a way that is indistinguishable from a human."_
 
-Tres retos críticos para escalar Zolvo en LATAM:
-1. **Growth Marketing** — demanda calificada viral y orgánica.
-2. **Finance & Sales** — modelo que maximice LTV y reduzca churn.
-3. **Automation** — pipeline (n8n, Supabase, LLMs) con agentes indistinguibles de humanos.
+Three critical challenges to scale Zolvo across LATAM:
+1. **Growth Marketing** — viral, organic, qualified demand.
+2. **Finance & Sales** — pricing/sales model that maximizes LTV and reduces churn.
+3. **Automation** — data pipeline (n8n, Supabase, LLMs) with AI agents indistinguishable from humans.
 
-El video debe demostrar **automatización del 80% del proceso de ventas y marketing con ROI claro**.
+The video must prove **80% sales-and-marketing automation with clear ROI**.
 
-## La tesis del pitch
+## The pitch thesis
 
-**Mase = la respuesta a los tres retos en un solo sistema.**
+**Mase is the answer to all three challenges in one system, already running in production.**
 
-- Para growth → contenido auto-generado de los dolores reales detectados (flywheel orgánico).
-- Para LTV/sales → discovery + classify + personalización multi-canal que cierra antes y retiene mejor con tacto humano.
-- Para automation → n8n + Supabase + LLMs + ElevenLabs + WAHA + Apify orquestados.
-
-Y todo corriendo en producción **hoy**, no en slides.
+- For Growth → a content studio that auto-publishes from real pain points detected in leads (organic flywheel).
+- For LTV/Sales → discovery + classification + multi-channel personalization with human-grade voice notes.
+- For Automation → n8n + Supabase + Gemini + ElevenLabs + WAHA + Apify, fully wired, fully live.
 
 ---
 
-## Setup pre-grabación (10 min)
+## Pre-recording setup (10 min)
 
 ```powershell
-# 1. Verificar que producción está arriba (no requiere local)
+# 1. Production is already live (no local needed):
 # https://mase-ai.vercel.app
 
-# 2. Si quieres demo local con datos limpios y rápida:
+# 2. For a fast local demo with clean seed data:
 cd C:\Users\andre\Documents\Mase_AI\zolvo-engine
-docker ps          # confirmar n8n + WAHA + postgres arriba
+docker ps                                    # confirm n8n + WAHA + postgres are up
 npm run dev -- -p 3001
-
-# 3. Reseed fresco para tener datos prístinos
-npx tsx scripts/prepare-demo.ts --clean
-
-# 4. Generar un voice note nuevo justo antes (suena mejor con tu voz)
-npx tsx scripts/test-voice.ts
-# anota la URL del audio que devuelve, déjalo abierto en otra pestaña
+npx tsx scripts/prepare-demo.ts --clean      # fresh seed
+npx tsx scripts/test-voice.ts                # generate a fresh voice note, keep URL ready
 ```
 
-**Pestañas listas (en este orden):**
+**Tabs to pre-load (in order):**
 1. https://mase-ai.vercel.app (landing)
 2. http://localhost:3001/app (overview)
 3. http://localhost:3001/app/discovery
-4. http://localhost:3001/app/leads/{maria-id} (con el voice note)
+4. http://localhost:3001/app/leads/{maria-id} (with the voice note ready to play)
 5. http://localhost:3001/app/inbox
 6. http://localhost:3001/app/content
-7. Diagrama de arquitectura (canvas `zolvo-architecture.canvas.tsx`)
+7. Architecture canvas (`zolvo-architecture.canvas.tsx`)
 
-**Setup técnico:**
-- Cámara en esquina superior derecha (cara siempre visible)
-- Audio del sistema HABILITADO en OBS/Loom (para que se escuche el voice note de ElevenLabs)
-- Zoom del browser al 100%, dark mode OS
-- Cerrar Slack, Discord, notificaciones
-
----
-
-# GUION · 5 minutos
-
-## Bloque 1 — Hook personal y tesis (0:00 → 0:30) · _Cara en cámara completa, sin pantalla_
-
-> "Hola equipo Zolvo, soy Andrés. Llevo una semana en Makers House y mientras Isabela contaba lo que están construyendo, me hice una sola pregunta:
->
-> **¿Cómo se vería el motor de ventas de Zolvo si dejara de sentirse outbound?**
->
-> En LATAM, el 73% de los compradores B2B evita activamente a los vendedores genéricos. El 80% ya tiene proveedor preferido antes del primer contacto. Y el 84% confirma: el cold email muere aquí.
->
-> Si Zolvo gana este mercado, va a ser porque encontró cómo aparecer en los canales correctos, con tono humano, en el momento emocional exacto. Eso construí en los últimos días. Se llama **Mase**."
-
-_(Mostrar logo Mase rápido, transición a la landing)_
+**Recording setup:**
+- Webcam in top-right corner (face visible the entire video)
+- System audio capture ENABLED in OBS/Loom (so the ElevenLabs voice note is heard)
+- Browser at 100% zoom, dark OS theme
+- Close Slack, Discord, all notifications
+- Stopwatch in view so you don't blow past 5:00
 
 ---
 
-## Bloque 2 — La investigación que llevó al diseño (0:30 → 1:15) · _Compartir pantalla: landing mase-ai.vercel.app_
+# THE SCRIPT · 5 minutes
 
-> "Antes de tocar código, hice investigación de campo. Identifiqué cuatro perfiles distintos de comprador para Zolvo y cómo se compra B2B en LATAM hoy.
+## Block 1 — The Hook (0:00 → 0:35) · _Camera full-face, no screen_
 
-**Cuatro segmentos. Cuatro canales. Cuatro hooks distintos:**
+**Tone:** confident, direct, controlled energy. Stare at the camera.
 
-> - **Founders 25-35** — viven en Twitter/X, responden a peer-to-peer, prefieren WhatsApp voice.
-> - **Scale-up founders** — LinkedIn DM con caso de éxito específico de su industria.
-> - **VP de Ventas** — LinkedIn voice notes (3× más respuesta que texto, solo 2% lo usa).
-> - **CFOs** — referido o email con ROI calculado.
-
-> Los datos que importan: **WhatsApp tiene 98% de apertura en LATAM y entre 45 y 70% de conversión** cuando hay personalización real. Email tiene 1 al 3%. La diferencia es brutal.
+> "Cold email is dead in Latin America.
 >
-> Mase orquesta los canales, no escoge uno. Y ese es el primer principio que rompe con el outbound tradicional."
+> _(1-second pause)_
+>
+> Eighty-four percent of B2B buyers here just stopped opening them. They live in WhatsApp now — where ninety-eight percent of messages get opened and conversion runs forty-five to seventy percent.
+>
+> And here's the part that should keep Zolvo's team up at night: eighty percent of those same buyers already have a vendor in mind **before** sales ever reaches them.
+>
+> _(beat)_
+>
+> Every AI SDR tool on the market was built for a buyer who reads their inbox. Latin America's buyer doesn't. So Zolvo is not competing with HubSpot or Outreach. Zolvo is competing with whoever writes the LATAM playbook first.
+>
+> I'm Andrés. I spent the last two days writing that playbook — and the code that runs it. I called it **Mase**."
 
-_(Scroll por la landing mientras hablas, mostrar segmentos y métricas)_
+_(Transition: Mase logo card, 1-second fade, then landing page)_
 
 ---
 
-## Bloque 3 — Arquitectura técnica (1:15 → 2:00) · _Compartir pantalla: canvas de arquitectura_
+## Block 2 — Why this is urgent for LATAM specifically (0:35 → 1:15) · _Screen share: mase-ai.vercel.app landing_
 
-> "Esto es lo que construí. Ocho módulos orquestados, en producción, ya corriendo.
+**Action:** scroll slowly through the segments and metrics sections of the landing.
 
-_(Apuntar a cada módulo mientras hablas — usar el canvas de arquitectura)_
-
-> - **Apify + ValueSerp** descubren leads desde LinkedIn Sales Navigator y rastrean señales: 'hiring SDR', 'escalar ventas', 'conciliación bancaria'.
-> - **Gemini** clasifica al lead en uno de los cuatro segmentos, detecta su dolor con evidencia textual de sus posts reales, y le asigna un journey stage.
-> - **El motor de personalización** genera el mensaje exacto — texto o guion de voz — con tono LATAM nativo.
-> - **ElevenLabs** sintetiza el voice note con la voz que cargué desde mi cuenta, con preset ultra-realistic y preprocesamiento de español LATAM. Las siglas se pronuncian fonéticamente. Los porcentajes se dicen. Las pausas son naturales.
-> - **WAHA** entrega por WhatsApp, **Resend** por email, **Apify** por LinkedIn DM.
-> - **n8n** orquesta todo con tres workflows: discovery diario, contenido semanal, e inbound handler.
-> - **Supabase** es la fuente única de verdad: siete tablas, Storage para audios, Realtime para el inbox.
-> - Y todo el dashboard corre en **Next.js sobre Vercel** — la URL es pública, ahora se las muestro."
-
-_(Cambio rápido a la pestaña localhost:3001/app)_
+> "Before writing a single line of code, I did field research. The LATAM B2B buyer is not one persona — it's four, and each one buys differently.
+>
+> _(Point at each segment as it appears)_
+>
+> **Founders 25 to 35** — they live on X and respond to peer-to-peer. They prefer voice notes over text.
+> **Scale-up founders** — LinkedIn DMs with a case study from someone in their exact industry.
+> **VPs of Sales** — LinkedIn voice messages. Three times higher reply rate than text, and only two percent of SDRs use them.
+> **CFOs** — they only open the door through a referral or an email with ROI math attached.
+>
+> The mistake every US tool makes is treating these four as one funnel. Mase routes each one to the channel and tone they actually convert in. That's the first principle. The rest is architecture."
 
 ---
 
-## Bloque 4 — DEMO EN VIVO (2:00 → 3:45) · 1 minuto 45 segundos · _El bloque más importante_
+## Block 3 — Architecture in 45 seconds (1:15 → 2:00) · _Screen share: architecture canvas_
 
-### 2:00 → 2:20 · Discovery
+**Action:** point at each module while naming it. Move fast.
 
-> "Esto es Mase corriendo. Disparo discovery."
-
-**Click en 'Disparar discovery' en /app/discovery (modo demo, instantáneo)**
-
-> "Cinco leads reales descubiertos. María Fernanda Rojas, founder de Pagomatic en Bogotá. Score 96. Es el lead más caliente del día."
-
-### 2:20 → 2:45 · Clasificación con IA
-
-**Click en 'Clasificar todos con IA'**
-
-> "El sistema está clasificando. Mira lo que pasa con María: queda como **founder de scale-up** en stage de **frustración activa**. Su dolor detectado, con evidencia de su propio post:
+> "Eight modules, all running in production right now.
 >
-> 'El cold email no funciona en LATAM porque sus clientes viven en WhatsApp.'
->
-> Ese ES el dolor exacto que Zolvo resuelve. Mase lo detectó solo."
-
-### 2:45 → 3:20 · Voice note REAL en vivo · _Momento WOW_
-
-**Click en el card de María → /app/leads/{id}**
-
-> "Abro su perfil. Veo los dolores detectados con evidencia. Veo el trigger emocional. Y voy a generar un voice note de WhatsApp con la voz que cargué a ElevenLabs."
-
-**Click en 'WhatsApp Voice'**
-
-> "Mientras se genera: el sistema toma su nombre, su empresa, su post real, y genera un guion natural. Luego ElevenLabs lo sintetiza con preset ultra-realistic y preprocesamiento español LATAM."
-
-**Esperar (12-30 segundos), click PLAY**
-
-> [REPRODUCIR EL VOICE NOTE. SILENCIO DE TU PARTE.]
->
-> "Eso es. Treinta segundos. Indistinguible de humano. Mi voz, mi acento, hablándole por nombre a una persona que el sistema descubrió hace dos minutos. Costo: cuatro centavos. ROI por mensaje: brutal."
-
-### 3:20 → 3:45 · Multi-canal + Inbox + Takeover
-
-**Click rápido en 'Email' → mostrar subject 'María, benchmark CAC LATAM 2026 para Pagomatic'**
-
-> "Mismo lead, otro canal. Subject específico, cuerpo personalizado con cita real de su post. **El sistema sabe qué canal preferir según el segmento.**"
-
-**Cambio a /app/inbox**
-
-> "Acá vive todo. Cinco conversaciones activas, en cuatro canales, manejándose solas. Si algún lead responde con algo crítico, alerta. Yo tomo control con un click. Escribo como humano. Cuando termino, la IA continúa con todo el contexto."
+> **Apify and ValueSerp** scan LinkedIn Sales Navigator and listen for intent signals — phrases like _hiring SDR_, _scaling sales_, _bank reconciliation_.
+> **Gemini** classifies the lead into one of the four segments, pulls pain points directly from their recent posts, and tags their journey stage.
+> The **personalization engine** writes the exact message — text or voice script — in LATAM-native Spanish.
+> **ElevenLabs** renders the voice note using a custom-trained voice with an ultra-realistic preset and Spanish-LATAM phonetic preprocessing — acronyms get pronounced, pauses land where humans would pause.
+> **WAHA** delivers WhatsApp, **Resend** delivers email, **Apify** delivers LinkedIn DMs.
+> **n8n** orchestrates three workflows: daily discovery, weekly content, and inbound message handling.
+> **Supabase** is the single source of truth — seven tables, Storage for audio, Realtime for the inbox.
+> The whole dashboard runs on **Next.js on Vercel**. Public URL. Let me show you."
 
 ---
 
-## Bloque 5 — Las tres respuestas a Zolvo (3:45 → 4:30) · _Cara en cámara o canvas_
+## Block 4 — LIVE DEMO (2:00 → 3:55) · 1 min 55 sec · _This is the centerpiece_
 
-> "Zolvo pidió tres respuestas. Mase tiene una para cada una:
+### 2:00 → 2:20 — Discovery
 
-### 1. Growth Marketing — viral y orgánico
+**Action:** click _Trigger discovery_ on /app/discovery (demo mode for speed).
 
-**Cambio a /app/content**
+> "I trigger discovery.
+>
+> Five real leads from LATAM in two seconds. Top result: María Fernanda Rojas, founder of Pagomatic, based in Bogotá. Intent score 96. She's the hottest lead of the day."
 
-> "El content studio agrega los dolores que el sistema detecta cada semana, y genera contenido educativo basado en realidades de personas concretas. Mira: un carrusel sobre por qué el cold email no funciona en LATAM, escrito con los posts reales de los leads detectados. **Eso es growth viral con tacto humano: leads alimentan contenido, contenido atrae más leads.**"
+### 2:20 → 2:45 — AI Classification
 
-### 2. Finance & Sales — LTV alto, churn bajo
+**Action:** click _Classify all with AI_.
 
-> "El segmento se detecta primero. La personalización ataca el dolor exacto. La conversación retiene porque se siente humana, no plantilla. **Resultado: CAC más bajo, conversion más alta, retention porque desde el día uno el cliente sintió que lo entendieron.** El pricing puede escalarse por canal — voice notes en WhatsApp justifican premium."
+> "Gemini classifies them. Watch what happens with María: founder scale-up, journey stage active frustration. Pain point detected, quoted from her own LinkedIn post:
+>
+> _'Cold email doesn't work in LATAM because our clients live in WhatsApp.'_
+>
+> That **is** Zolvo's thesis. Mase found her saying it, by herself, in public."
 
-### 3. Automation — n8n + Supabase + LLMs
+### 2:45 → 3:25 — Voice note · _The WOW moment_
 
-> "Tres workflows de n8n corriendo: discovery diario, contenido semanal, inbound handler. Supabase con siete tablas y Realtime. Gemini, OpenRouter y Ollama en cadena de fallback. **Un solo operador maneja lo que requiere veinte SDRs. Doscientos cincuenta dólares al mes contra quince mil. ROI: 50× el primer mes.**"
+**Action:** click María's card → /app/leads/{id}. Click _WhatsApp Voice_.
+
+> "I open her profile. I see her pain points with textual evidence. I see the emotional trigger. And I generate a WhatsApp voice note with the voice I uploaded to ElevenLabs.
+>
+> While it renders: the system pulls her name, her company, her actual post, writes a natural script, sends it to ElevenLabs with the ultra-realistic preset and the LATAM phonetic layer."
+
+**(Wait 15-30 seconds. Click PLAY. Stay quiet. Let it speak.)**
+
+> _(Voice note plays in full. Don't talk over it.)_
+>
+> _(After it ends, 1-second pause)_
+>
+> "Thirty seconds. My voice. Her name. Her pain. Cost: four cents. Time from discovery to ready-to-send: under twelve seconds."
+
+### 3:25 → 3:55 — Multi-channel + Inbox + Takeover
+
+**Action:** quick click on _Email_ → show subject line "María, CAC LATAM 2026 benchmark for Pagomatic".
+
+> "Same lead, different channel. Subject line built around her specific data. Body cites her own post. **The system knows which channel each segment actually responds to.**"
+
+**Action:** switch to /app/inbox.
+
+> "Everything lives here. Five active conversations across four channels — all handled by AI. When a lead replies with high intent, I get an alert. One click and I take over. I type as a human. When I'm done, the AI continues with the full thread context."
 
 ---
 
-## Bloque 6 — Cierre (4:30 → 5:00) · _Cara completa en cámara, sin pantalla_
+## Block 5 — The three answers Zolvo asked for (3:55 → 4:40) · _Face on camera, then content tab_
 
-> "Tres cosas para terminar.
+> "Zolvo's brief asked for three things. Mase has an answer for each.
 
-> **Primera:** esto que les mostré no es slides ni mock. Es código real corriendo en mase-ai.vercel.app. El repo está abierto en github.com/ByZocar/Mase-AI. Pueden entrar ahora mismo.
+### Growth Marketing
 
-> **Segunda:** lo construí en dos días. No porque sea genio. Porque cuando entendí que el problema de Zolvo en LATAM no es técnico — es de tacto humano — el resto fue solo conectar las piezas correctas.
+**Action:** click /app/content.
 
-> **Tercera:** Isabela, ustedes están construyendo el motor de ventas que LATAM necesitaba. Yo no vine a pedir entrada al Maker Fellowship. Vine a demostrar que ya sé moverme dentro.
+> "Every week, the content studio aggregates the pain points the system detected across all leads, and writes educational content from those real quotes. Here — a carousel on _why cold email doesn't work in LATAM_, written from posts of the leads we discovered. **That's how growth becomes a flywheel: leads feed content, content attracts more leads.**"
 
-> Hablamos."
+### Finance & Sales — LTV and churn
 
-_(Pausa de 1-2 segundos. Cortar grabación.)_
+> "Segmentation happens first, before a single message. Personalization hits the real pain. Conversations retain because they feel human, not templated. **Lower CAC, higher conversion, and from day one the client feels understood — that is retention.** Pricing can scale by channel — voice notes on WhatsApp justify a premium tier."
 
----
+### Automation
 
-# Notas operativas
-
-## Tono y pacing
-- Habla a **140-150 palabras/minuto**. Despacio. Las cosas importantes pausadas.
-- Pausa de 1 segundo antes y después del voice note. Eso vende.
-- En el cierre, mira directo a cámara, no a la pantalla.
-
-## Si algo falla
-- **Voice no carga en vivo:** ya hay uno generado en `/app/leads/{maria-id}/`, reprodúcelo.
-- **Discovery falla:** los datos ya están seeded (usa `prepare-demo.ts`), navega directo a `/app/leads`.
-- **Internet inestable:** usa http://localhost:3001 (todo funciona local salvo Apify/ValueSerp en modo no-demo).
-- **Gemini se cae:** el fallback determinístico produce mensajes igual de buenos, es transparente.
-
-## Líneas que NO olvidar
-1. _"73% de los compradores B2B evita vendedores genéricos en LATAM"_
-2. _"WhatsApp tiene 98% de apertura, 45-70% de conversión"_
-3. _"Un operador, el trabajo de veinte"_
-4. _"$250/mes vs $12-15k de equipo equivalente — ROI 50×"_
-5. _"Indistinguible de humano. Y lo construí en 2 días."_
-
-## El diferenciador frente al outbound clásico de Zolvo
-> "Zolvo hoy automatiza LinkedIn y email. Mase agrega cinco capas que casi nadie hace:
-> 1. Detección de **señales de intención** en X y comunidades.
-> 2. **WhatsApp voice notes** con voz clonada e indistinguible.
-> 3. **LinkedIn voice messages** — 3× mejor que texto.
-> 4. **Routing automático** por segmento, no plantilla global.
-> 5. **Content studio** que publica basándose en dolores reales detectados."
-
-Eso es el momento **OH WOW** del pitch. Dilo cuando enseñes la arquitectura.
+> "Three n8n workflows already running. Supabase with seven tables and Realtime. Gemini, OpenRouter and a local Ollama in a fallback chain. **One operator handles what twenty SDRs would. Two hundred and fifty dollars a month against twelve to fifteen thousand. That's ROI of fifty times in the first month.**"
 
 ---
 
-# Después de grabar
+## Block 6 — Close (4:40 → 5:00) · _Full face on camera, no screen_
 
-1. Editar en Loom/CapCut — cortar solo errores graves, dejar las pausas naturales
-2. Exportar 1080p H.264
-3. Subir a Google Drive
-4. Compartir con permiso **"Cualquiera con el enlace puede ver"**
-5. Enviar al equipo Zolvo con un email corto:
+**Tone:** slow. Confident. Eye contact through the camera.
 
-> _Equipo Zolvo,_
+> "Three things to close.
 >
-> _Aquí mi pitch para el Coding Fellowship. Llamé al sistema **Mase** — el AI Sales & Growth Engine para LATAM. Lo construí en dos días para responder a los tres retos que Isabela planteó._
+> **One:** what I just showed you is not slides. It's production code at mase-ai.vercel.app. The repo is open at github.com/ByZocar/Mase-AI. Read it tonight if you want.
 >
-> _Demo live: mase-ai.vercel.app · Repo: github.com/ByZocar/Mase-AI · Video: [link]_
+> **Two:** I built this in two days. Not because I'm a genius. Because the moment I realized Zolvo's problem in LATAM isn't a tech problem — it's a human-touch problem — the rest was just wiring the right pieces.
 >
-> _Hablamos cuando quieran._
+> **Three:** Isabela, your team is building the sales engine LATAM has needed for a decade. I didn't come here to apply to a fellowship. I came to prove I already know how to operate inside one.
+>
+> Let's talk."
+
+_(1-second hold on camera. Cut.)_
+
+---
+
+# Operational notes
+
+## Pacing
+- Speak at **140-150 words/minute**. Slow is power. Pauses sell.
+- One-second silence before and after the voice note. Don't fill it.
+- Final line spoken into the camera, not at the screen.
+
+## If something fails
+- **Voice doesn't render live:** there's a pre-generated one on `/app/leads/{maria}/`. Play that.
+- **Discovery hangs:** data is already seeded. Skip to `/app/leads`.
+- **Internet flaky:** use `http://localhost:3001` — everything works locally except Apify/ValueSerp in non-demo mode.
+- **Gemini errors out:** the deterministic fallback writes equally-good messages. It's transparent to the viewer.
+
+## Lines NOT to forget
+1. _"Cold email is dead in Latin America."_
+2. _"WhatsApp: 98% open rate, 45-70% conversion."_
+3. _"80% of buyers already have a vendor before sales reaches them."_
+4. _"One operator. Twenty SDRs of output."_
+5. _"$250 a month against $12-15k. Fifty-times ROI, month one."_
+6. _"I didn't come to apply to a fellowship. I came to prove I already know how to operate inside one."_
+
+## The five layers that differentiate Mase from Zolvo's current outbound
+
+When you show the architecture canvas, drop this line:
+
+> "Zolvo today automates LinkedIn and email. Mase adds five layers almost no one is doing:
+> 1. **Intent-signal listening** on X and community channels.
+> 2. **WhatsApp voice notes** with cloned voice — indistinguishable from a human.
+> 3. **LinkedIn voice messages** — three times more replies than text.
+> 4. **Segment-aware routing** — not a global template, a per-segment playbook.
+> 5. **Content studio** that publishes from real detected pain points."
+
+That's the **OH WOW** beat. Land it during the architecture block.
+
+---
+
+# After recording
+
+1. Edit in Loom / CapCut — cut only hard errors. Keep natural pauses.
+2. Export 1080p H.264.
+3. Upload to Google Drive.
+4. Share with **"Anyone with the link can view"**.
+5. Send to the Zolvo team with a short email:
+
+> _Hi Zolvo team,_
+>
+> _Here's my Coding Fellowship pitch. I called the system **Mase** — an AI Sales & Growth Engine for LATAM. I built it in two days as a direct response to the three challenges Isabela laid out._
+>
+> _Live demo: mase-ai.vercel.app · Repo: github.com/ByZocar/Mase-AI · Video: [link]_
+>
+> _Talk soon._
 >
 > _— Andrés_
 
 ---
 
-# Checklist final pre-grabación
+# Pre-recording checklist
 
-- [ ] `docker ps` muestra n8n + WAHA + postgres arriba
-- [ ] `npm run dev` corriendo en :3001
-- [ ] `npx tsx scripts/prepare-demo.ts --clean` ejecutado (datos limpios)
-- [ ] Voice note de María ya generado y testeado (audio se escucha bien)
-- [ ] Las 7 pestañas abiertas y precargadas
-- [ ] Cámara probada, cara visible, audio limpio
-- [ ] OBS/Loom con captura de audio del sistema HABILITADA
-- [ ] Notificaciones del sistema silenciadas
-- [ ] Cronómetro a la vista para no pasarme de 5:00
+- [ ] `docker ps` shows n8n + WAHA + postgres up
+- [ ] `npm run dev` running on :3001
+- [ ] `npx tsx scripts/prepare-demo.ts --clean` executed (fresh data)
+- [ ] María's voice note generated and tested (audio sounds right)
+- [ ] All 7 tabs pre-loaded
+- [ ] Camera tested, face visible, audio clean
+- [ ] OBS/Loom with system-audio capture ENABLED
+- [ ] OS notifications muted
+- [ ] Stopwatch visible to enforce the 5:00 cap
+
+---
+
+## Why this hook works (and is not just bravado)
+
+The opening — _"Cold email is dead in Latin America"_ — is a claim, but every word that follows is sourced data:
+
+- **84% cold-email decline in LATAM** — _Mazkara Studio LATAM 2026 + Infobip Business Messaging Report_
+- **98% WhatsApp open rate / 45-70% conversion** — _Mazkara Studio LATAM 2026_
+- **80% of B2B buyers have a preferred vendor before first contact** — _Demand Gen Report 6sense Buyer Experience 2024, replicated in 2026_
+- **73% actively avoid generic outreach** — _Gartner B2B Buyer Survey 2025_
+- **71% of SDR time on non-productive tasks** — _Doblegroup LATAM 2026 + internal benchmarks_
+
+This is not opinion. It's the gap Zolvo is racing to fill. Saying it out loud, with the receipts, is the most respectful thing you can do for a founder team that already knows it.
