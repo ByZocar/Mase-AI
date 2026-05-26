@@ -2,6 +2,8 @@
 
 **Ventas con tacto humano para LATAM.**
 
+🌐 **Live demo:** [mase-ai.vercel.app](https://mase-ai.vercel.app) · **Repo:** [github.com/ByZocar/Mase-AI](https://github.com/ByZocar/Mase-AI)
+
 Mase es un AI Sales & Growth Engine que combina lead discovery (Apify + ValueSerp), clasificación con IA (Gemini), personalización multi-canal (LinkedIn, WhatsApp, Email, Twitter/X), voice notes hiperpersonalizados en español LATAM (ElevenLabs), conversation manager con takeover humano y generación automática de contenido educativo basado en dolores reales.
 
 Una sola persona puede operar lo que normalmente requiere un equipo de veinte SDRs.
